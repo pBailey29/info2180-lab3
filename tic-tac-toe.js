@@ -233,3 +233,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Exercise 5
+document.addEventListener("DOMContentLoaded", function () {
+    const squares = document.querySelectorAll("#board div");
+    const status = document.getElementById("status");
+    const newGameButton = document.querySelector(".btn");
+
+    let currentPlayer = "X";
+    let gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+    function checkWinner() {
+        // No changes to this function
+    }
+
+    function handleSquareClick(event) {
+        // No changes to this function
+    }
+
+    function handleSquareHover(event) {
+        // No changes to this function
+    }
+
+    // Resets the game
+    function resetGame() {
+        gameBoard = ["", "", "", "", "", "", "", "", ""];
+        status.textContent = "Move your mouse over a square and click to play an X or an O.";
+        status.classList.remove("you-won");
+        currentPlayer = "X";
+        squares.forEach((square) => {
+            square.textContent = "";
+            square.classList.remove("X", "O");
+        });
+    }
+
+    squares.forEach((square) => {
+        square.addEventListener("click", handleSquareClick);
+        square.addEventListener("mouseover", handleSquareHover);
+    });
+
+    // Add click event listener to the New Game button to reset the game
+    newGameButton.addEventListener("click", resetGame);
+});
