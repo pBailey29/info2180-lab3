@@ -274,3 +274,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add click event listener to the New Game button to reset the game
     newGameButton.addEventListener("click", resetGame);
 });
+
+// Exercise 6
+function handleSquareClick(event) {
+    const square = event.target;
+    const index = Array.from(squares).indexOf(square);
+
+    if (gameBoard[index] === "") {
+        gameBoard[index] = currentPlayer;
+        square.textContent = currentPlayer;
+        square.classList.add(currentPlayer);
+
+        if (!checkWinner()) {
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            status.classList.remove("you-won");
+            status.textContent = `Player ${currentPlayer}'s turn`;
+        }
+    }
+}
