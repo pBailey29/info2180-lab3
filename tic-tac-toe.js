@@ -89,3 +89,66 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// Exercise 3
+document.addEventListener("DOMContentLoaded", function () {
+    const squares = document.querySelectorAll("#board div");
+    const status = document.getElementById("status");
+    const newGameButton = document.querySelector(".btn");
+
+    let currentPlayer = "X";
+    let gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+    function checkWinner() {
+        // No changes to this function
+    }
+
+    function handleSquareClick(event) {
+        const square = event.target;
+        const index = Array.from(squares).indexOf(square);
+
+        if (gameBoard[index] === "") {
+            gameBoard[index] = currentPlayer;
+            square.textContent = currentPlayer;
+            square.classList.add(currentPlayer);
+
+            if (!checkWinner()) {
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                status.classList.remove("you-won");
+                status.textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+    }
+
+    // Handles square hover
+    function handleSquareHover(event) {
+        const square = event.target;
+
+        // Applys the "hover" class on mouseover
+        square.classList.add("hover");
+
+        // Removes the "hover" class on mouseout
+        square.addEventListener("mouseout", function () {
+            square.classList.remove("hover");
+        });
+    }
+
+    // Add click event listener to each square
+    squares.forEach((square) => {
+        square.addEventListener("click", handleSquareClick);
+
+        // Add mouseover event listener to handle square hover
+        square.addEventListener("mouseover", handleSquareHover);
+    });
+
+    newGameButton.addEventListener("click", function () {
+        gameBoard = ["", "", "", "", "", "", "", "", ""];
+        status.textContent = "Move your mouse over a square and click to play an X or an O.";
+        status.classList.remove("you-won");
+        currentPlayer = "X";
+        squares.forEach((square) => {
+            square.textContent = "";
+            square.classList.remove("X", "O");
+        });
+    });
+});
